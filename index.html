@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Arita Coffee</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#673a19;
+padding:15px;
+}
+
+.header{
+text-align:center;
+margin-bottom:20px;
+}
+
+.header h1{
+color:#673a19;
+}
+
+.top-bar{
+margin-bottom:20px;
+}
+
+#searchInput{
+width:100%;
+padding:12px;
+border:none;
+border-radius:12px;
+margin-bottom:10px;
+}
+
+.lang-buttons{
+display:flex;
+gap:10px;
+}
+
+.lang-buttons button{
+flex:1;
+border:none;
+background:#673a19;
+color:white;
+padding:10px;
+border-radius:10px;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+
+.card{
+background:white;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    border-radius:15px;
+}
+
+.card-content{
+padding:10px;
+}
+
+.price{
+margin-top:5px;
+font-weight:bold;
+color:#673a19;
+}
+
+.btn{
+margin-top:10px;
+width:100%;
+border:none;
+padding:8px;
+background:#673a19;
+color:white;
+border-radius:8px;
+}
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.6);
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:white;
+width:90%;
+max-width:400px;
+border-radius:15px;
+overflow:hidden;
+}
+
+.modal-content img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.modal-text{
+padding:15px;
+}
+
+.close{
+width:100%;
+padding:10px;
+border:none;
+background:#673a19;
+color:white;
+border-radius:8px;
+margin-top:15px;
+}
+.card{
+transition:transform .25s ease, box-shadow .25s ease;
+animation:fadeIn .5s ease forwards;
+opacity:0;
+transform:translateY(10px);
+}
+
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+@keyframes fadeIn{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.6);
+justify-content:center;
+align-items:center;
+animation:fadeBg .2s ease;
+}
+
+.modal-content{
+animation:scaleIn .25s ease;
+}
+
+@keyframes fadeBg{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+@keyframes scaleIn{
+from{
+transform:scale(.85);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+
+.top-bar{
+animation:fadeIn .5s ease;
+}
+
+body{
+background:
+linear-gradient(
+180deg,
+#673a19 0%,
+#673a19 100%
+);
+
+min-height:100vh;
+position:relative;
+overflow-x:hidden;
+}
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+background: url("https://www.colorhexa.com/f6e7ca.png") center/cover no-repeat;
+
+filter: blur(1px) brightness(1);
+transform: scale(1.15);
+
+pointer-events:none;
+z-index:-1;
+}
+
+.logo{
+width:120px;
+display:block;
+margin:0 auto 15px;
+}
+
+.header{
+text-align:center;
+padding:20px 0;
+}
+
+.header h1{
+font-size:38px;
+color:#673a19;
+font-family:Georgia,serif;
+margin-bottom:8px;
+}
+
+.subtitle{
+color:#673a19;
+letter-spacing:3px;
+font-size:13px;
+}
+
+.top-bar{
+background:rgba(255,255,255,.6);
+backdrop-filter:blur(10px);
+padding:15px;
+border-radius:25px;
+margin-bottom:20px;
+}
+
+#searchInput{
+background:white;
+box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.card{
+background:rgba(255,255,255,.85);
+backdrop-filter:blur(15px);
+
+border-radius:22px;
+
+overflow:hidden;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.08);
+
+border:1px solid rgba(255,255,255,.7);
+
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card img{
+height:160px;
+}
+
+.product-title{
+font-size:22px;
+font-family:Georgia,serif;
+color:#673a19;
+}
+
+.price{
+font-size:22px;
+font-weight:bold;
+color:#673a19;
+}
+
+.btn{
+background:
+linear-gradient(
+135deg,
+#673a19,
+#673a19
+);
+
+font-weight:600;
+padding:12px;
+border-radius:12px;
+
+transition:.3s;
+}
+
+.btn:hover{
+transform:scale(1.03);
+}
+
+.modal-content{
+border-radius:25px;
+overflow:hidden;
+}
+
+.modal-content img{
+height:250px;
+}
+
+.modal-text{
+padding:20px;
+}
+
+.close{
+background:
+linear-gradient(
+135deg,
+#673a19,
+#673a19
+);
+}
+
+.coffee-divider{
+font-size:28px;
+margin:10px 0 20px;
+color:#673a19;
+}
+</style>
+
+
+</head>
+<body>
+<div class="header">
+
+<img src="arita-logo.png" class="logo">
+
+<h1>Arita Coffee</h1>
+
+<p class="subtitle">
+Мәзір/Меню
+</p>
+
+</div>
+<input
+type="text"
+id="searchInput"
+placeholder="Поиск..."
+onkeyup="searchProducts()">
+
+<div class="lang-buttons">
+<button onclick="setLanguage('ru')">RU</button>
+<button onclick="setLanguage('kz')">KZ</button>
+</div>
+
+</div>
+
+<div class="products">
+
+<div class="card product"
+data-ru="Горячий шоколад"
+data-kz="Ыстық шоколад">
+
+<img src="images/hot chocolate.jpg">
+
+<div class="card-content">
+
+<h3 class="product-title">Горячий шоколад</h3>
+
+<div class="price"></div>
+
+<button class="btn product-btn"
+data-ru="Подробнее"
+data-kz="Толығырақ"
+onclick="openModal(
+'Горячий шоколад',
+'Насыщенный горячий шоколад с маршмеллоу.',
+'Маршмеллоумен қою ыстық шоколад.',
+'2500 ₸',
+'images/hot chocolate.jpg'
+)">
+Подробнее
+</button>
+
+</div>
+</div>
+
+<div class="card product"
+data-ru="Капучино"
+data-kz="Капучино">
+
+<img src="images/kap.jpg">
+
+<div class="card-content">
+
+<h3 class="product-title">
+Капучино
+</h3>
+
+<div class="price">
+</div>
+
+<button class="btn product-btn"
+data-ru="Подробнее"
+data-kz="Толығырақ"
+onclick="openModal(
+'Капучино',
+'Нежный кофейный напиток с насыщенным эспрессо, горячим молоком и воздушной молочной пенкой. Идеальный баланс крепости и мягкости.',
+'Қанық эспрессо, ыстық сүт және ауадай жеңіл сүт көбігінен тұратын нәзік кофе сусыны. Күштілік пен жұмсақтықтың тамаша үйлесімі.',
+'250мл-1000 ₸ ; 350мл-1100 ₸',
+'images/kap.jpg'
+)">
+Подробнее
+</button>
+
+</div>
+</div>
+
+
+<div class="card product"
+data-ru="Эспрессо"
+data-kz="Эспрессо">
+
+<img src="images/espres.jpg">
+
+<div class="card-content">
+
+<h3 class="product-title">
+Эспрессо
+</h3>
+
+<div class="price">
+</div>
+
+<button class="btn product-btn"
+data-ru="Подробнее"
+data-kz="Толығырақ"
+onclick="openModal(
+'Эспрессо',
+'Небольшая порция крепкого кофе с ярким ароматом и плотной кремовой пенкой. Настоящая классика для любителей насыщенного вкуса.',
+'Қанық хош иісі және қою әрі кілегейлі көбігі бар аз мөлшердегі қою кофе. Бай дәмді бағалайтындар үшін нағыз классика.',
+'40мл-800 ₸',
+'images/espres.jpg'
+)">
+Подробнее
+</button>
+
+</div>
+</div>
+
+<div class="card product"
+data-ru="Эспрессо"
+data-kz="Эспрессо">
+
+<img src="images/espres.jpg">
+
+<div class="card-content">
+
+<h3 class="product-title">
+Эспрессо
+</h3>
+
+<div class="price">
+</div>
+
+<button class="btn product-btn"
+data-ru="Подробнее"
+data-kz="Толығырақ"
+onclick="openModal(
+'Эспрессо',
+'Небольшая порция крепкого кофе с ярким ароматом и плотной кремовой пенкой. Настоящая классика для любителей насыщенного вкуса.',
+'Қанық хош иісі және қою әрі кілегейлі көбігі бар аз мөлшердегі қою кофе. Бай дәмді бағалайтындар үшін нағыз классика.',
+'40мл-800 ₸',
+'images/espres.jpg'
+)">
+Подробнее
+</button>
+
+</div>
+</div>
+
+
+<div class="card product"
+data-ru="Эспрессо"
+data-kz="Эспрессо">
+
+<img src="images/espres.jpg">
+
+<div class="card-content">
+
+<h3 class="product-title">
+Эспрессо
+</h3>
+
+<div class="price">
+</div>
+
+<button class="btn product-btn"
+data-ru="Подробнее"
+data-kz="Толығырақ"
+onclick="openModal(
+'Эспрессо',
+'Небольшая порция крепкого кофе с ярким ароматом и плотной кремовой пенкой. Настоящая классика для любителей насыщенного вкуса.',
+'Қанық хош иісі және қою әрі кілегейлі көбігі бар аз мөлшердегі қою кофе. Бай дәмді бағалайтындар үшін нағыз классика.',
+'40мл-800 ₸',
+'images/espres.jpg'
+)">
+Подробнее
+</button>
+
+</div>
+</div>
+
+
+<div class="card product"
+data-ru="Флэт Уайт"
+data-kz="Флэт Уайт">
+
+<img src="images/flet.jpg">
+
+<div class="card-content">
+
+<h3 class="product-title">
+Флэт Уайт
+</h3>
+
+<div class="price">
+</div>
+
+<button class="btn product-btn"
+data-ru="Подробнее"
+data-kz="Толығырақ"
+onclick="openModal(
+'Флэт Уайт',
+'Крепкий кофейный напиток с двойным эспрессо и шелковистой молочной текстурой. Больше кофе, меньше пены — для настоящих ценителей.',
+'Қос эспрессо мен жібектей жұмсақ сүт құрылымы үйлескен қанық дәмді кофе сусыны. Нағыз білгірлерге арналған: кофесі көбірек, көбігі азырақ.',
+'250мл-1100 ₸',
+'images/flet.jpg'
+)">
+Подробнее
+</button>
+
+</div>
+</div>
+
+
+
+
+<div class="card product"
+data-ru="Чай листовой(черный, зеленый)"
+data-kz="Түйіршіктелмеген шай(қара, жасыл)">
+
+<img src="images/chai.jpg">
+
+<div class="card-content">
+
+<h3 class="product-title">
+Чай листовой
+</h3>
+
+<div class="price">
+</div>
+
+<button class="btn product-btn"
+data-ru="Подробнее"
+data-kz="Толығырақ"
+onclick="openModal(
+'Чай листовой',
+'Ароматный чай из качественных чайных листьев с насыщенным вкусом и натуральным ароматом. Идеальный выбор для спокойного отдыха и приятной беседы.',
+'Сапалы шай жапырақтарынан дайындалған хош иісті шай. Қанық дәмі мен табиғи хош иісімен ерекшеленеді, жайлы демалыс пен жағымды әңгімеге тамаша үйлеседі.',
+'350мл-800₸',
+'images/chai.jpg'
+)">
+Подробнее
+</button>
+
+</div>
+</div>
+
+
+
+<div class="card product"
+data-ru="Айс Американо"
+data-kz="Айс Американо">
+
+<img src="images/ice amer.jpg">
+
+<div class="card-content">
+
+<h3 class="product-title">
+Айс Американо
+</h3>
+
+<div class="price">
+</div>
+
+<button class="btn product-btn"
+data-ru="Подробнее"
+data-kz="Толығырақ"
+onclick="openModal(
+'Айс Американо',
+'Освежающий кофейный напиток на основе насыщенного эспрессо и холодной воды со льдом. Лёгкий, бодрящий вкус с ярким ароматом кофе — идеальный выбор для жаркого дня.',
+'Қанық эспрессо, суық су және мұздан дайындалған сергітетін кофе сусыны. Ол жеңіл әрі сергітетін дәмімен және кофеге тән айқын хош иісімен ерекшеленеді — ыстық күнге таптырмас таңдау.',
+'250мл-900 ₸ ; 350мл-1000₸',
+'images/ice amer.jpg'
+)">
+Подробнее
+</button>
+
+</div>
+</div>
+
+
+
+<div class="card product"
+data-ru="Бамбл Апельсин"
+data-kz="Бамбл Апельсин">
+
+<img src="images/bumble ap.jpg">
+
+<div class="card-content">
+
+<h3 class="product-title">
+Бамбл Апельсин
+</h3>
+
+<div class="price">
+</div>
+
+<button class="btn product-btn"
+data-ru="Подробнее"
+data-kz="Толығырақ"
+onclick="openModal(
+'Бамбл Апельсин',
+'Яркое сочетание холодного эспрессо, апельсинового сока и сладкого сиропа. Необычный вкус с бодрящей цитрусовой свежестью.',
+'Салқындатылған эспрессо, апельсин шырыны мен тәтті сироптың жарқын үйлесімі. Цитрустың сергітетін балғындығымен ерекшеленетін дәм.',
+' 350мл-1300₸',
+'images/bumble ap.jpg'
+)">
+Подробнее
+</button>
+
+</div>
+</div>
+
+<div class="card product"
+data-ru="Латте"
+data-kz="Латте">
+
+<img src="images/latte.jpg">
+
+<div class="card-content">
+
+<h3 class="product-title">
+Латте
+</h3>
+
+<div class="price">
+</div>
+
+<button class="btn product-btn"
+data-ru="Подробнее"
+data-kz="Толығырақ"
+onclick="openModal(
+'Латте',
+'Мягкий и сливочный напиток на основе эспрессо с большим количеством нежного молока. Лёгкий вкус и приятная кремовая текстура.',
+'Эспрессо негізіндегі, мол әрі жұмсақ сүт қосылған, біркелкі әрі кілегейлі сусын. Ол жұмсақ дәмімен және жағымды, кілегейлі құрылымымен ерекшеленеді.',
+'350мл-1000 ₸',
+'images/latte.jpg'
+)">
+Подробнее
+</button>
+
+</div>
+</div>
+
+</div>
+
+<div class="modal" id="modal">
+
+<div class="modal-content">
+
+<img id="modalImg">
+
+<div class="modal-text">
+
+<h2 id="title"></h2>
+
+<p id="description"></p>
+
+<br>
+
+<strong id="price"></strong>
+
+<button class="close" onclick="closeModal()">
+Закрыть
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let currentLanguage="kz";
+
+function setLanguage(lang){
+
+currentLanguage = lang;
+
+document.querySelectorAll(".product").forEach(card => {
+
+  const title = card.querySelector(".product-title");
+  const btn = card.querySelector(".product-btn");
+
+  if(title && card.dataset[lang]){
+    title.innerText = card.dataset[lang];
+  }
+
+  if(btn && btn.dataset[lang]){
+    btn.innerText = btn.dataset[lang];
+  }
+
+});
+
+}
+function searchProducts(){
+
+let input=
+document
+.getElementById("searchInput")
+.value
+.toLowerCase();
+
+document
+.querySelectorAll(".product")
+.forEach(card=>{
+
+let ru=
+card.dataset.ru.toLowerCase();
+
+let kz=
+card.dataset.kz.toLowerCase();
+
+if(
+ru.includes(input)
+||
+kz.includes(input)
+){
+card.style.display="block";
+}
+else{
+card.style.display="none";
+}
+
+});
+
+}
+
+function openModal(
+title,
+descriptionRu,
+descriptionKz,
+price,
+image
+){
+
+const modal = document.getElementById("modal");
+
+document.getElementById("title").innerText = title;
+
+document.getElementById("description").innerText =
+currentLanguage === "ru"
+? descriptionRu
+: descriptionKz;
+
+document.getElementById("price").innerText = price;
+
+document.getElementById("modalImg").src = image;
+
+modal.style.display = "flex";
+
+setTimeout(()=>{
+modal.style.opacity = "1";
+},10);
+
+}
+
+function closeModal(){
+
+const modal = document.getElementById("modal");
+
+modal.style.opacity = "0";
+
+setTimeout(()=>{
+modal.style.display = "none";
+},200);
+
+}
+</script>
+
+</body>
+</html>
